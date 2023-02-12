@@ -195,23 +195,24 @@ class publicar(TemplateView):
             tel=request.POST["cell"]
             mail = request.POST["email"]
             user = request.POST["user"]
-            publicar = Room()
-            publicar.title = tipo
-            publicar.price = precio
-            publicar.description = descrip
-            publicar.pais = pais
-            publicar.ciudad = ciudad
-            publicar.dateI = fechaI
-            publicar.dateF = fechaF
-            publicar.image1 = "rooms/"+img1
-            publicar.image2 = "rooms/"+img2
-            publicar.image3 = "rooms/"+img3
-            publicar.image4 = "rooms/"+img4
-            publicar.nom = name
-            publicar.apell = apell
-            publicar.email = mail
-            publicar.cell = tel
-            publicar.autor = user
+            publicar = Room(
+                title = tipo,
+                description = descrip,
+                price = precio,
+                pais = pais,
+                ciudad = ciudad,
+                dateI = fechaI,
+                dateF = fechaF,
+                image1 = img1,
+                image2 = img2,
+                image3 = img3,
+                image4 = img4,
+                nom = name,
+                apell = apell,
+                email = mail,
+                cell = tel,
+                autor = user
+            )
             publicar.save()
             return redirect('home')
     
