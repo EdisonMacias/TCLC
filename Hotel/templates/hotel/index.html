@@ -1,0 +1,198 @@
+{% extends 'core/base.html' %}
+{% block title %}Inicio{% endblock %}
+{% block home %}
+<div class="tm-section tm-bg-img tm-section-1" id="">
+    <div class="tm-bg-white ie-container-width-fix-2">
+        <div class="container ie-h-align-center-fix">
+            <div class="row">
+                <div class="col-xs-12 ml-auto mr-auto ie-container-width-fix">
+                    <form action="{% url 'anuncios' %}" method="" class="tm-search-form tm-section-pad-2">
+                        <div class="form-row tm-search-form-row">
+                            <div class="form-group tm-form-element tm-form-element-100">
+                                <i class="fa fa-map-marker fa-2x tm-form-element-icon"></i>
+                                <input name="city" type="text" class="form-control" id="inputCity" placeholder="Escribe tu destino...">
+                            </div>
+                            <div class="form-group tm-form-element tm-form-element-50">
+                                <i class="fa fa-calendar fa-2x tm-form-element-icon"></i>
+                                <input name="check-in" type="text" class="form-control" id="inputCheckIn" placeholder="Desde...">
+                            </div>
+                            <div class="form-group tm-form-element tm-form-element-50">
+                                <i class="fa fa-calendar fa-2x tm-form-element-icon"></i>
+                                <input name="check-out" type="text" class="form-control" id="inputCheckOut" placeholder="Hasta...">
+                            </div>
+                        </div>
+                        <div class="form-row tm-search-form-row">
+                            <div class="form-group tm-form-element tm-form-element-2">                                            
+                                <select name="adult" class="form-control tm-select" id="adult">
+                                    <option value="">Adultos</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                                <i class="fa fa-2x fa-user tm-form-element-icon"></i>
+                            </div>
+                            <div class="form-group tm-form-element tm-form-element-2">                                            
+                                <select name="children" class="form-control tm-select" id="children">
+                                    <option value="">Niños</option>
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                                <i class="fa fa-user tm-form-element-icon tm-form-element-icon-small"></i>
+                            </div>
+                            <div class="form-group tm-form-element tm-form-element-2">
+                                <select name="room" class="form-control tm-select" id="room">
+                                    <option value="">Habitaciones</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                                <i class="fa fa-2x fa-bed tm-form-element-icon"></i>
+                            </div>
+                            <div class="form-group tm-form-element tm-form-element-2">
+                                <button type="submit" class="btn btn-primary tm-btn-search">Consultar disponibilidad</button>
+                            </div>
+                          </div>
+                          <div class="form-row clearfix pl-2 pr-2 tm-fx-col-xs">
+                              <a href="#" class="ie-10-ml-auto ml-auto mt-1 tm-font-semibold tm-color-primary">Necesitas ayuda?</a>
+                          </div>
+                    </form>
+                </div>                        
+            </div>      
+        </div>
+    </div>                  
+</div>
+{% endblock %}
+{% block content %}
+{% load static %}
+<div class="tm-section-2">
+    <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <h2 class="tm-section-title">¿Estamos aquí para ayudarte?</h2>
+            </div>                
+        </div>
+    </div>        
+</div>
+
+<div class="tm-section tm-position-relative">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none" class="tm-section-down-arrow">
+        <polygon fill="#ee5057" points="0,0  100,0  50,60"></polygon>                   
+    </svg> 
+    <div class="container tm-pt-5 tm-pb-4">
+        <div class="row text-center">
+            {% for about in about %}
+                <article class="col-sm-12 col-md-4 col-lg-4 col-xl-4 tm-article">                            
+                    <i class="fa tm-fa-6x fa-lock tm-color-primary tm-margin-b-20"></i>
+                    <h3 class="tm-color-primary tm-article-title-1">Seguridad</h3>
+                    <p>{{about.description_security}}</p>
+                    <a href="#" class="text-uppercase tm-color-primary tm-font-semibold">sigue leyendo...</a>
+                </article>
+                <article class="col-sm-12 col-md-4 col-lg-4 col-xl-4 tm-article">                            
+                    <i class="fa tm-fa-6x fa-dollar tm-color-primary tm-margin-b-20"></i>
+                    <h3 class="tm-color-primary tm-article-title-1">Precios</h3>
+                    <p>{{about.description_price}}</p>
+                    <a href="#" class="text-uppercase tm-color-primary tm-font-semibold">sigue leyendo...</a>
+                </article>
+                <article class="col-sm-12 col-md-4 col-lg-4 col-xl-4 tm-article">                            
+                    <i class="fa tm-fa-6x fa-clock-o tm-color-primary tm-margin-b-20"></i>
+                    <h3 class="tm-color-primary tm-article-title-1">Disponibilidad</h3>
+                    <p>{{about.description_availability}}</p>
+                    <a href="#" class="text-uppercase tm-color-primary tm-font-semibold">sigue leyendo...</a>
+                </article>
+            {% endfor %}
+        </div>        
+    </div>
+</div>
+
+<div class="tm-section tm-section-pad tm-bg-gray" id="tm-section-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="tm-article-carousel">    
+                    {% for rooms in rooms %}
+                    <article class="tm-bg-white mr-2 tm-carousel-item">
+                        <div class="slider">
+                            <ul>
+                                <li>
+                                    <img src="{{rooms.image1.url}}" alt="Anuncios">
+                                </li>
+                                <li>
+                                    <img src="{{rooms.image2.url}}" alt="Anuncios">
+                                </li>
+                                <li>
+                                    <img src="{{rooms.image3.url}}" alt="Anuncios">
+                                </li>
+                                <li>
+                                    <img src="{{rooms.image4.url}}" alt="Anuncios">
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tm-article-pad">
+                            <header><h3 class="text-uppercase tm-article-title-2">{{rooms.title}}</h3></header>
+                            <p><strong>{{rooms.pais}}, {{rooms.ciudad}}</strong></p>
+                            <p>{{rooms.description}}</p>
+                            <a href="{% url 'anuncio' rooms.title %}" class="text-uppercase btn-primary tm-btn-primary">Mas informacion.</a>
+                        </div>                                
+                    </article> 
+                    {% endfor %}                                           
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tm-section tm-section-pad tm-bg-img" id="tm-section-5">                                                        
+    <div class="container ie-h-align-center-fix">
+        <div class="row tm-flex-align-center">
+            <div class="col-xs-12 col-md-12 col-lg-3 col-xl-3 tm-media-title-container">
+                <h2 class="text-uppercase tm-section-title-2 tm-color-primary">Blog</h2>
+            </div>
+            <div class="col-xs-12 col-md-12 col-lg-9 col-xl-9 mt-0 mt-sm-3">
+                <div class="ml-auto tm-bg-white-shadow tm-pad tm-media-container">
+                    {% for blog in blog %}
+                    <article class="media tm-margin-b-20 tm-media-1">
+                        <div>
+                            <img src="{{blog.image.url}}" alt="Blog">
+                        </div>
+                        <div class="media-body tm-media-body-1 tm-media-body-v-center texto-entrada">
+                            <h3 class="tm-font-semibold tm-color-primary tm-article-title-3">{{blog.title}}</h3>
+                            <p>Escrito el: <em>{{blog.date| date:'Y-m-d'}}</em> por: <em>{{blog.author}}</em></p>
+                            <p>{{blog.description}}</p>
+                        </div>                                
+                    </article>
+                    {% endfor %}
+                </div>                            
+            </div>
+        </div>
+    </div>
+</div>   
+
+<div class="tm-section tm-section-pad tm-bg-img tm-position-relative" >
+    <div class="container ie-h-align-center-fix">
+        <div id="google-map"></div>               
+    </div>
+</div>
+{% endblock %}

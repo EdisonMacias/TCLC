@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head> 
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>TCLC | {% block title %}{% endblock title %}</title>
+        {% load static %}
+        <link rel="shortcut icon" href="{% static 'core/img/logo.png' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">  
+        <link rel="stylesheet" href="{% static 'core/Css/font-awesome-4.7.0/css/font-awesome.min.css' %}">                
+        <link rel="stylesheet" href="{% static 'core/Css/bootstrap.min.css' %}">                                      
+        <link rel="stylesheet" href="{% static 'core/Css/slick/slick.css' %}"/>
+        <link rel="stylesheet" href="{% static 'core/Css/slick/slick-theme.css' %}"/>
+        <link rel="stylesheet" href="{% static 'core/Css/datepicker.css' %}"/>
+        <link rel="stylesheet" href="{% static 'core/Css/tooplate-style.css' %}">     
+        <link rel="stylesheet" href="{% static 'core/Css/Estilos.css' %}"> 
+        <script src="{% static 'core/js/jquery-1.11.3.min.js' %}"></script>            
+        <script src="{% static 'core/js/popper.min.js' %}"></script>                          
+        <script src="{% static 'core/js/bootstrap.min.js' %}"></script>                
+        <script src="{% static 'core/js/datepicker.min.js' %}"></script>               
+        <script src="{% static 'core/js/jquery.singlePageNav.min.js' %}"></script>     
+        <script src="{% static 'core/Css/slick/slick.min.js' %}"></script>
+    </head>
+
+    <body>
+        <div class="tm-main-content" id="top">
+            <div class="tm-top-bar-bg"></div>
+            <div class="tm-top-bar" id="tm-top-bar">
+                <div class="container">
+                    <div class="row">
+                        <nav class="navbar navbar-expand-lg narbar-light">
+                            <a class="navbar-brand mr-auto" href="{% url 'home' %}">
+                                <img class="imagen" src="{% static 'core/img/logo.png' %}" alt="Site logo">
+                                TCLC
+                            </a>
+                            <button type="button" id="nav-toggle" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div id="mainNav" class="collapse navbar-collapse tm-bg-white">
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'anuncios' %}">Alojamientos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'contacto' %}">Contáctenos</a>
+                                    </li>
+                                    {% if user.is_authenticated %}
+                                    <li class="nav-item dropdown">
+                                            <a class="nav-link" href="">Publicacion</a>
+                                            <div class="dropdown-content">
+                                                <a class="nav-link" href="{% url 'publicar' %}">Publicar</a>
+                                                <a class="nav-link" href="{% url 'publicaciones' %}">Publicaciones</a>
+                                            </div>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'cerrar_sesion' %}">Cerrar Sesion</a>
+                                    </li>
+                                    {% else %}              
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'login' %}">Iniciar sesion</a>
+                                    </li>         
+                                    {% endif %}
+                                </ul>
+                            </div>                            
+                        </nav>            
+                    </div>
+                </div>
+            </div>
+            
+            {% block home %}{% endblock home %}
+
+            {% block content %}{% endblock content %}
+            
+            <footer class="tm-bg-dark-blue">
+                <div class="container">
+                    <div class="row">
+                        <p class="col-sm-12 text-center tm-font-light tm-color-white p-4 tm-margin-b-0">
+                        Copyright &copy; <span class="tm-current-year">2023</span> Edison Macias
+                        </p>        
+                    </div>
+                </div>                
+            </footer>
+        </div>            
+        <script>
+
+            /* Google map
+            ------------------------------------------------*/
+            var map = '';
+            var center;
+    
+            function initialize() {
+                var mapOptions = {
+                    zoom: 12,
+                    center: new google.maps.LatLng(-1.052554460906693, -80.45482512115791),
+                    scrollwheel: false
+                };
+    
+                map = new google.maps.Map(document.getElementById('google-map'),  mapOptions);
+    
+                google.maps.event.addDomListener(map, 'idle', function() {
+                  calculateCenter();
+              });
+    
+                google.maps.event.addDomListener(window, 'resize', function() {
+                  map.setCenter(center);
+              });
+            }
+    
+            function calculateCenter() {
+                center = map.getCenter();
+            }
+    
+            function loadGoogleMap(){
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDVWt4rJfibfsEDvcuaChUaZRS5NXey1Cs&v=3.exp&sensor=false&' + 'callback=initialize';
+                document.body.appendChild(script);
+            } 
+    
+            function setCarousel() {
+                
+                if ($('.tm-article-carousel').hasClass('slick-initialized')) {
+                    $('.tm-article-carousel').slick('destroy');
+                } 
+    
+                if($(window).width() < 438){
+                    // Slick carousel
+                    $('.tm-article-carousel').slick({
+                        infinite: false,
+                        dots: true,
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    });
+                }
+                else {
+                 $('.tm-article-carousel').slick({
+                        infinite: false,
+                        dots: true,
+                        slidesToShow: 3,
+                        slidesToScroll: 1
+                    });   
+                }
+            }
+    
+            function setPageNav(){
+                if($(window).width() > 991) {
+                    $('#tm-top-bar').singlePageNav({
+                        currentClass:'active',
+                        offset: 79
+                    });   
+                }
+                else {
+                    $('#tm-top-bar').singlePageNav({
+                        currentClass:'active',
+                        offset: 65
+                    });   
+                }
+            }
+    
+            function togglePlayPause() {
+                vid = $('.tmVideo').get(0);
+    
+                if(vid.paused) {
+                    vid.play();
+                    $('.tm-btn-play').hide();
+                    $('.tm-btn-pause').show();
+                }
+                else {
+                    vid.pause();
+                    $('.tm-btn-play').show();
+                    $('.tm-btn-pause').hide();   
+                }  
+            }
+       
+            $(document).ready(function(){
+    
+                $(window).on("scroll", function() {
+                    if($(window).scrollTop() > 100) {
+                        $(".tm-top-bar").addClass("active");
+                    } else {
+                        //remove the background property so it comes transparent again (defined in your css)
+                       $(".tm-top-bar").removeClass("active");
+                    }
+                });      
+    
+                // Google Map
+                loadGoogleMap();  
+    
+                // Date Picker
+                const pickerCheckIn = datepicker('#inputCheckIn',{
+                    customDays: ['D', 'L', 'M', 'MI', 'J', 'V', 'S'],
+                    customMonths: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 
+                    'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                    minDate: new Date({{año}},{{mes}},{{dia}}),
+                });
+                const pickerCheckOut = datepicker('#inputCheckOut',{
+                    customDays: ['D', 'L', 'M', 'MI', 'J', 'V', 'S'],
+                    customMonths: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 
+                    'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                });
+                
+                
+                // Slick carousel
+                setCarousel();
+    
+                $(window).resize(function() {
+                  setCarousel();
+                });
+    
+                // Update the current year in copyright
+                $('.tm-current-year').text(new Date().getFullYear());                           
+            });
+        </script> 
+    </body> 
+</html>

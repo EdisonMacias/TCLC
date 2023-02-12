@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+{% block title %}Blog{% endblock %}
+{% block content %}
+<div class="tm-section tm-section-pad tm-bg-gray" id="tm-section-4">
+    <div class="contenedor-anuncios">    
+        {% for blog in blog %}
+        <article class="anuncio">
+            <div class="imag">
+                <img src="{{blog.image.url}}" alt="Anuncios">
+            </div>
+            <div class="tm-article-pad texto-entrada">
+                <h3 class="text-uppercase tm-article-title-2">{{blog.title}}</h3>
+                <p>Escrito el: <em>{{blog.date| date:'Y-m-d'}}</em> por: <em>{{blog.author}}</em></p>
+                <p>{{blog.description}}</p>
+            </div>                                
+        </article> 
+        {% endfor %}                                           
+    </div>    
+</div>
+{% endblock %}
